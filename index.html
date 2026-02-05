@@ -13,22 +13,23 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4e8 100%);
+            background: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            padding: 20px;
             position: relative;
         }
 
         /* Floating hearts background animation */
         .heart-bg {
-            position: absolute;
+            position: fixed;
             font-size: 20px;
-            opacity: 0.3;
+            opacity: 0.15;
             animation: float 10s infinite ease-in-out;
             pointer-events: none;
+            color: #ffb6d9;
         }
 
         @keyframes float {
@@ -40,13 +41,17 @@
             }
         }
 
-        /* Main container */
+        /* Main container - cute pink box */
         .container {
             text-align: center;
-            padding: 20px;
-            max-width: 600px;
-            width: 90%;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            background: linear-gradient(135deg, #ffe0f0 0%, #ffd4e8 100%);
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.3);
             transition: opacity 0.5s ease;
+            position: relative;
         }
 
         .container.fade-out {
@@ -55,11 +60,12 @@
 
         /* Main heading */
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             color: #ff1493;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
             line-height: 1.4;
+            font-weight: 600;
         }
 
         /* Button container - relative positioning for absolute No button */
@@ -69,20 +75,21 @@
             gap: 20px;
             justify-content: center;
             align-items: center;
-            min-height: 200px;
-            margin-top: 30px;
+            min-height: 250px;
+            margin-top: 20px;
+            width: 100%;
         }
 
         /* Base button styles */
         button {
-            font-size: 1.5rem;
-            padding: 20px 40px;
+            font-size: 1.3rem;
+            padding: 18px 35px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
         button:active {
@@ -117,10 +124,14 @@
 
         /* No button - moves around */
         #noBtn {
-            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
             color: #666;
             position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             transition: all 0.3s ease;
+            z-index: 5;
         }
 
         #noBtn:hover {
@@ -150,7 +161,7 @@
         }
 
         .celebration h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 10vw, 5rem);
             color: #ff1493;
             margin-bottom: 30px;
             animation: bounce 0.8s ease;
@@ -166,7 +177,7 @@
         }
 
         .celebration p {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 5vw, 2rem);
             color: #ff69b4;
             margin-bottom: 20px;
         }
@@ -233,17 +244,29 @@
 
         /* Mobile optimizations */
         @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
             h1 {
-                margin-bottom: 30px;
+                margin-bottom: 20px;
+                font-size: clamp(1.3rem, 7vw, 2rem);
             }
 
             button {
-                font-size: 1.2rem;
-                padding: 15px 30px;
+                font-size: 1.1rem;
+                padding: 15px 28px;
             }
 
             .button-container {
-                min-height: 150px;
+                min-height: 200px;
+            }
+
+            .music-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -271,9 +294,8 @@
     <!-- Celebration screen (hidden initially) -->
     <div class="celebration" id="celebration">
         <h1>YAY!!! 💖</h1>
-        <p>I knew you'd say yes! 🥰</p>
-        <p>✨ You've made me the happiest! ✨</p>
-        <div style="font-size: 4rem; margin-top: 30px;">
+        <p>Can't wait! 🥰</p>
+        <div style="font-size: clamp(2.5rem, 10vw, 4rem); margin-top: 30px;">
             💕 💖 💗 💝 💓
         </div>
     </div>
@@ -449,11 +471,6 @@
             }
         });
 
-        // Initialize No button position as absolute
-        noBtn.style.position = 'absolute';
-        noBtn.style.left = '50%';
-        noBtn.style.top = '50%';
-        noBtn.style.transform = 'translate(-50%, -50%)';
     </script>
 </body>
 </html>
