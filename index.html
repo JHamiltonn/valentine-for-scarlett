@@ -188,15 +188,20 @@
 
         /* Confetti animation */
         .confetti {
-            position: absolute;
+            position: fixed;
             width: 10px;
             height: 10px;
             background: #ff69b4;
-            animation: confetti-fall 3s linear infinite;
+            top: -20px;
+            animation: confetti-fall 3s linear forwards;
             pointer-events: none;
         }
 
         @keyframes confetti-fall {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
             to {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
@@ -428,7 +433,6 @@
                     confetti.className = 'confetti';
                     confetti.style.left = Math.random() * 100 + '%';
                     confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 3 + 's';
                     confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     
                     // Random shapes
@@ -438,8 +442,9 @@
                     
                     document.body.appendChild(confetti);
                     
-                    // Remove after animation
-                    setTimeout(() => confetti.remove(), 5000);
+                    // Remove after animation completes
+                    const duration = parseFloat(confetti.style.animationDuration) * 1000;
+                    setTimeout(() => confetti.remove(), duration);
                 }, i * 30);
             }
         }
