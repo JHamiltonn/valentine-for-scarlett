@@ -78,6 +78,7 @@
             min-height: 250px;
             margin-top: 20px;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         /* Base button styles */
@@ -102,6 +103,7 @@
             color: white;
             position: relative;
             z-index: 10;
+            flex-shrink: 0;
         }
 
         #yesBtn:hover {
@@ -126,12 +128,14 @@
         #noBtn {
             background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
             color: #666;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
             transition: all 0.3s ease;
             z-index: 5;
+            flex-shrink: 0;
+        }
+
+        #noBtn.moving {
+            position: absolute;
         }
 
         #noBtn:hover {
@@ -327,6 +331,11 @@
         // Function to move No button to random position
         function moveNoButton() {
             noAvoidCount++;
+            
+            // Make button absolutely positioned on first move
+            if (noAvoidCount === 1) {
+                noBtn.classList.add('moving');
+            }
             
             // Get container dimensions
             const containerRect = buttonContainer.getBoundingClientRect();
